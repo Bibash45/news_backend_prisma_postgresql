@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// User.prisma
+model User {
+  id        String   @id @default(uuid())  
+  username  String   @unique
+  password  String
+  email     String   @unique
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+
+// News.prisma
+model News {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  author      String
+  province    String 
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  media       Media?
+  publishedAt DateTime @default(now())
+  tags        String[] @default([])
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Category.prisma
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  news      News[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Media.prisma
+model Media {
+  id      Int    @id @default(autoincrement())
+  images  String[]
+  videos  String[]
+  newsId  Int    @unique
+  news    News   @relation(fields: [newsId], references: [id])
+}

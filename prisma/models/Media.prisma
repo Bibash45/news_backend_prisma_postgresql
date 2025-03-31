@@ -1,0 +1,7 @@
+model Media {
+  id      Int    @id @default(autoincrement())
+  images  String[]
+  videos  String[]
+  newsId  Int    @unique
+  news    News   @relation(fields: [newsId], references: [id])
+}

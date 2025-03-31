@@ -1,0 +1,26 @@
+1. Install Prisma & PostgreSQL Driver
+
+First, install the required dependencies:
+
+npm install @prisma/client
+npm install --save-dev prisma
+npm install pg
+
+2. Initialize Prisma
+
+Run the following command to initialize Prisma in your project:
+
+npx prisma init
+
+This will generate a prisma folder with a schema.prisma file.
+
+
+npm run prisma:merge && npx prisma generate
+
+
+// again
+npx prisma db push
+
+
+// migration
+npx prisma migrate dev
