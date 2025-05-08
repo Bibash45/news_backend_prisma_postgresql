@@ -26,4 +26,4 @@ npx prisma db push
 
 
 // migration
-npx prisma migrate dev
+npx prisma migrate dev --name first_migration
